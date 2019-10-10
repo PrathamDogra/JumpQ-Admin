@@ -2,39 +2,39 @@ import React, { Component } from "react";
 import axios from "axios";
 import Products from './Products';
 //http://localhost:5000/
-const url = "http://localhost:5000/";
+// const url = "http://localhost:5000/";
 class ProductsList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      exercises: []
+      products: []
     };
   }
-  deleteExercise = id => {
+  deleteProduct = id => {
     axios
-      .delete(`${url}product/${id}`)
+      .delete(`https://jumpq-admin.herokuapp.com/product/${id}`)
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
     this.setState({
-      exercises: this.state.exercises.filter(exercise => exercise._id !== id)
+      products: this.state.products.filter(product => product._id !== id)
     });
   };
-  exerciseList=()=>{
-    return this.state.exercises.map(exercise=>{
+  productList=()=>{
+    return this.state.products.map(product=>{
         return (
           <Products
-            exercise={exercise}
-            deleteExercise={this.deleteExercise}
-            key={exercise._id}
+            product={product}
+            deleteproduct={this.deleteproduct}
+            key={product._id}
           />
         );
     })
   }
   componentDidMount() {
     axios
-      .get(`${url}product`)
-      .then(res => this.setState({ exercises: res.data }))
+      .get(`https://jumpq-admin.herokuapp.com/product`)
+      .then(res => this.setState({ products: res.data }))
       .catch(err => console.log(err));
   }
   render() {
@@ -51,7 +51,7 @@ class ProductsList extends Component {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>{this.exerciseList()}</tbody>
+          <tbody>{this.productList()}</tbody>
         </table>
       </div>
     );

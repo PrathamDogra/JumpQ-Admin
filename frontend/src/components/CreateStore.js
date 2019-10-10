@@ -1,31 +1,31 @@
 import React, { Component } from "react";
 import axios from "axios";
-const url = "http://localhost:5000/";
+// const url = "http://localhost:5000/";
 class CreateStore extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: ""
+      storename: ""
     };
   }
   onChangeUsername = e => {
     this.setState({
-      username: e.target.value
+      storename: e.target.value
     });
   };
   onSubmit = e => {
     e.preventDefault();
-    const user = {
-      username: this.state.username
+    const store = {
+      storename: this.state.storename
     };
-    console.log(user);
+    console.log(store);
     axios
-      .post(`${url}store/add`, user)
+      .post(`https://jumpq-admin.herokuapp.com/store/add`, store)
       .then(res => console.log(res));
     this.setState({
-        username:''
-    })
+      storename: ""
+    });
   };
 
   render() {
@@ -39,7 +39,7 @@ class CreateStore extends Component {
               type="text"
               required
               className="form-control"
-              value={this.state.username}
+              value={this.state.storename}
               onChange={this.onChangeUsername}
             />
           </div>

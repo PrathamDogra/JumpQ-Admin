@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 const Products = props => {
   return (
     <tr>
-      <td>{props.exercise.username}</td>
-      <td>{props.exercise.description}</td>
-      <td>{props.exercise.duration}</td>
-      <td>{props.exercise.date.substring(0, 10)}</td>
+      <td>{props.product.storename}</td>
+      <td>{props.product.productname}</td>
+      <td>{props.product.quantity}</td>
+      <td>{props.product.date.substring(0, 10)}</td>
       <td>
-        <Link to={"/edit/" + props.exercise._id}>Edit</Link> |{" "}
+        <Link to={"/edit/" + props.product._id}>Edit</Link> |{" "}
         <a
           href="#"
           onClick={() => {
-            props.deleteExercise(props.exercise._id);
+            props.deleteproduct(props.product._id);
           }}
         >
           Delete

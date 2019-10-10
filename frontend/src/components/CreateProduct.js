@@ -2,32 +2,32 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-const url = "http://localhost:5000/";
+// const url = "http://localhost:5000/";
 class CreateProduct extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: "",
-      description: "",
-      duration: 0,
+      storename: "",
+      productname: "",
+      quantity: "",
       date: new Date(),
-      users: []
+      stores: []
     };
   }
   onChangeUsername = e => {
     this.setState({
-      username: e.target.value
+      storename: e.target.value
     });
   };
   onChangeDescription = e => {
     this.setState({
-      description: e.target.value
+      productname: e.target.value
     });
   };
   onChangeDuration = e => {
     this.setState({
-      duration: e.target.value
+      quantity: e.target.value
     });
   };
   onChangeDate = date => {
@@ -38,25 +38,25 @@ class CreateProduct extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const { username, duration, date, description } = this.state;
-    const exercise = {
-      username,
-      duration,
-      date,
-      description
+    const { storename, productname, quantity, date } = this.state;
+    const product = {
+      storename,
+      productname,
+      quantity,
+      date
     };
-    console.log(exercise);
+    console.log(product);
     axios
-      .post(`${url}product/add`, exercise)
+      .post(`https://jumpq-admin.herokuapp.com/product/add`, product)
       .then(res => console.log(res.data));
     // window.location = "/";
   };
   componentDidMount() {
-    axios.get(`${url}store`).then(res => {
+    axios.get(`https://jumpq-admin.herokuapp.com/store`).then(res => {
       if (res.data.length > 0) {
         this.setState({
-          users: res.data.map(user => user.username),
-          username: res.data[0].username
+          stores: res.data.map(user => user.storename),
+          storename: res.data[0].username
         });
       }
     });
@@ -72,13 +72,13 @@ class CreateProduct extends Component {
               ref="userInput"
               required
               className="form-control"
-              value={this.state.username}
+              value={this.state.storename}
               onChange={this.onChangeUsername}
             >
-              {this.state.users.map(function(user) {
+              {this.state.stores.map(function(store) {
                 return (
-                  <option key={user} value={user}>
-                    {user}
+                  <option key={store} value={store}>
+                    {store}
                   </option>
                 );
               })}
@@ -90,7 +90,7 @@ class CreateProduct extends Component {
               type="text"
               required
               className="form-control"
-              value={this.state.description}
+              value={this.state.productname}
               onChange={this.onChangeDescription}
             />
           </div>
@@ -99,7 +99,7 @@ class CreateProduct extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.state.duration}
+              value={this.state.quantity}
               onChange={this.onChangeDuration}
             />
           </div>
@@ -116,7 +116,7 @@ class CreateProduct extends Component {
           <div className="form-group">
             <input
               type="submit"
-              value="Create Exercise Log"
+              value="Add Product"
               className="btn btn-primary"
             />
           </div>

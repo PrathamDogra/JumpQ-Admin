@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-const url = "http://localhost:5000/";
+// const url = "http://localhost:5000/";
 export default class EditProducts extends Component {
   constructor(props) {
     super(props);
@@ -14,24 +14,24 @@ export default class EditProducts extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      username: "",
-      description: "",
-      duration: 0,
+      storename: "",
+      productname: "",
+      quantity: 0,
       date: new Date(),
-      users: []
+      stores: []
     };
   }
 
   componentDidMount() {
     axios
       .get(
-        `${url}product/${this.props.match.params.id}`
+        `https://jumpq-admin.herokuapp.com/product/${this.props.match.params.id}`
       )
       .then(response => {
         this.setState({
-          username: response.data.username,
-          description: response.data.description,
-          duration: response.data.duration,
+          storename: response.data.storename,
+          productname: response.data.productname,
+          quantity: response.data.quantity,
           date: new Date(response.data.date)
         });
       })
@@ -40,11 +40,11 @@ export default class EditProducts extends Component {
       });
 
     axios
-      .get(`${url}store/`)
+      .get(`https://jumpq-admin.herokuapp.com/store/`)
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
-            users: response.data.map(user => user.username)
+            stores: response.data.map(store => store.storename)
           });
         }
       })
@@ -55,19 +55,19 @@ export default class EditProducts extends Component {
 
   onChangeUsername(e) {
     this.setState({
-      username: e.target.value
+      storename: e.target.value
     });
   }
 
   onChangeDescription(e) {
     this.setState({
-      description: e.target.value
+      productname: e.target.value
     });
   }
 
   onChangeDuration(e) {
     this.setState({
-      duration: e.target.value
+      quantity: e.target.value
     });
   }
 
@@ -80,19 +80,19 @@ export default class EditProducts extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const exercise = {
-      username: this.state.username,
-      description: this.state.description,
-      duration: this.state.duration,
+    const product = {
+      storename: this.state.storename,
+      productname: this.state.productname,
+      quantity: this.state.quantity,
       date: this.state.date
     };
 
-    console.log(exercise);
+    console.log(product);
 
     axios
       .post(
-        `${url}exercises/update/${this.props.match.params.id}`,
-        exercise
+        `https://jumpq-admin.herokuapp.com/products/update/${this.props.match.params.id}`,
+        product
       )
       .then(res => console.log(res.data));
 
@@ -110,13 +110,13 @@ export default class EditProducts extends Component {
               ref="userInput"
               required
               className="form-control"
-              value={this.state.username}
+              value={this.state.storename}
               onChange={this.onChangeUsername}
             >
-              {this.state.users.map(function(user) {
+              {this.state.stores.map(function(store) {
                 return (
-                  <option key={user} value={user}>
-                    {user}
+                  <option key={store} value={store}>
+                    {store}
                   </option>
                 );
               })}
@@ -128,7 +128,7 @@ export default class EditProducts extends Component {
               type="text"
               required
               className="form-control"
-              value={this.state.description}
+              value={this.state.productname}
               onChange={this.onChangeDescription}
             />
           </div>
@@ -137,7 +137,7 @@ export default class EditProducts extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.state.duration}
+              value={this.state.quantity}
               onChange={this.onChangeDuration}
             />
           </div>
