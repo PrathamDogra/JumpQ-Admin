@@ -49,7 +49,7 @@ class CreateProduct extends Component {
     axios
       .post(`https://jumpq-admin.herokuapp.com/product/add`, product)
       .then(res => console.log(res.data));
-    // window.location = "/";
+    window.location = "/";
   };
   componentDidMount() {
     axios.get(`https://jumpq-admin.herokuapp.com/store`).then(res => {
@@ -67,7 +67,7 @@ class CreateProduct extends Component {
         <h3>Add New Product</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label>Storename: </label>
+            <label>Store Name: </label>
             <select
               ref="userInput"
               required
@@ -85,7 +85,7 @@ class CreateProduct extends Component {
             </select>
           </div>
           <div className="form-group">
-            <label>Productname: </label>
+            <label>Product Name: </label>
             <input
               type="text"
               required

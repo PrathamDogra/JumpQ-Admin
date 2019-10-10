@@ -25,7 +25,7 @@ class ProductsList extends Component {
         return (
           <Products
             product={product}
-            deleteproduct={this.deleteproduct}
+            deleteproduct={this.deleteProduct}
             key={product._id}
           />
         );
@@ -44,8 +44,8 @@ class ProductsList extends Component {
         <table className="table">
           <thead className="thead-light">
             <tr>
-              <th>Storename</th>
-              <th>Productname</th>
+              <th>Store Name</th>
+              <th>Product Name</th>
               <th>Quantity</th>
               <th>Date</th>
               <th>Actions</th>
