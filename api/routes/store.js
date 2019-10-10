@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
 router.post("/add", (req, res) => {
   const storename = req.body.storename;
 
-  const newStore = new Product({ storename });
+  const newStore = new Store({ storename });
   newStore
     .save()
     .then(() => res.json("Store added"))
