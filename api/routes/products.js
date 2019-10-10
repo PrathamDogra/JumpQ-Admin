@@ -12,7 +12,7 @@ router.post("/add", (req, res) => {
   const storename = req.body.storename;
   const productname = req.body.productname;
 
-  const quantity = Number(req.body.quantity);
+  const quantity = req.body.quantity;
   const date = Date.parse(req.body.date);
   const newProduct = new Product({
     storename,
@@ -45,7 +45,7 @@ router.put("/:id", (req, res) => {
     .then(product => {
       product.storename = req.body.storename;
       product.productname = req.body.productname;
-      product.quantity = Number(req.body.quantity);
+      product.quantity = req.body.quantity;
       product.date = Date.parse(req.body.date);
 
       product
