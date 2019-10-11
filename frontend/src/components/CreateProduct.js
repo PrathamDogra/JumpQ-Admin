@@ -47,16 +47,16 @@ class CreateProduct extends Component {
     };
     console.log(product);
     axios
-      .post(`https://jumpq-admin.herokuapp.com/product/add`, product)
+      .post("https://jumpq-admin.herokuapp.com/product/add", product)
       .then(res => console.log(res.data));
-    window.location = "/";
+      // window.location = "/";
   };
   componentDidMount() {
     axios.get(`https://jumpq-admin.herokuapp.com/store`).then(res => {
       if (res.data.length > 0) {
         this.setState({
           stores: res.data.map(user => user.storename),
-          storename: res.data[0].username
+          storename: res.data[0].storename
         });
       }
     });

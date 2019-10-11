@@ -88,15 +88,16 @@ export default class EditProducts extends Component {
     };
 
     console.log(product);
-
+    console.log(this.props.match.params.id);
     axios
       .post(
         `https://jumpq-admin.herokuapp.com/products/update/${this.props.match.params.id}`,
         product
       )
-      .then(res => console.log(res.data));
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
 
-    window.location = "/";
+    // window.location = "/";
   }
 
   render() {

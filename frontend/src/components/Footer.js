@@ -12,7 +12,7 @@ const Footer = () => {
             </a>{" "}
             |{" "}
             <a
-              href="https://github.com/PrathamDogra/Exercise-Tracker"
+              href="https://github.com/PrathamDogra/JumpQ-Admin"
               target="_blank"
             >
               GitHub Repo
